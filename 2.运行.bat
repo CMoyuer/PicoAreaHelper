@@ -4,7 +4,7 @@
 cls
 echo ===================================================
 echo PICO区域切换助手
-echo 版本：0.1.1
+echo 版本：0.2
 echo By：如梦Nya
 echo ===================================================
 set adb=%~dp0\ADB\adb.exe
@@ -17,12 +17,14 @@ echo 功能清单
 echo 0.打开区域设置
 echo 1.切换设备区域为中国
 echo 2.切换设备区域为海外
+echo 3.重启设备
 echo ===================================================
 echo 请输入你要执行的功能ID：
 set /p mode=%1%
 if %mode% == 0 goto OpenFactoryTest
 if %mode% == 1 goto SwitchChina
 if %mode% == 2 goto SwitchOther
+if %mode% == 3 goto Reboot
 cls
 echo 参数错误，请重新输入数字ID！
 goto Success
@@ -48,13 +50,17 @@ pause
 echo ===================================================
 echo 清除应用缓存...
 %adb% shell pm clear com.picovr.store
-echo 清除应用缓存...
 %adb% shell pm clear com.picovr.vrusercenter
-echo 安装应用商店...
-%adb% install -r -d %~dp0\Apks\China\com.picovr.store_3.2.1.apk
-echo 安装用户中心...
-%adb% install -r -d  %~dp0\Apks\China\com.picovr.vrusercenter_1.3.7.apk
-echo 执行完成！
+%adb% shell pm clear com.bytedance.pico.matrix
+echo 删除不需要的应用...
+%adb% uninstall com.bytedance.pico.matrix
+echo 安装所需应用...
+for %%i in (%~dp0\Apks\China\*.apk) do (
+ 	ECHO 正在安装：%%i
+ 	%adb% install -r -d "%%i"
+)
+echo 转区完成！
+echo 如果打不开登录界面，请尝试重启设备~
 echo ===================================================
 goto End
 
@@ -66,14 +72,20 @@ pause
 echo ===================================================
 echo 清除应用缓存...
 %adb% shell pm clear com.picovr.store
-echo 清除应用缓存...
 %adb% shell pm clear com.picovr.vrusercenter
-echo 安装应用商店...
-%adb% install -r -d %~dp0\Apks\Other\com.picovr.store_3.3.0.apk
-echo 安装用户中心...
-%adb% install -r -d %~dp0\Apks\Other\com.picovr.vrusercenter_2.0.5.apk
+echo 安装所需应用...
+for %%i in (%~dp0\Apks\Other\*.apk) do (
+ 	ECHO 正在安装：%%i
+ 	%adb% install -r -d "%%i"
+)
 echo 执行完成！
 echo ===================================================
+goto End
+
+:Reboot
+%adb% reboot
+echo ===================================================
+echo 执行完成！
 goto End
 
 :End
