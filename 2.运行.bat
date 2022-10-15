@@ -1,12 +1,11 @@
 @echo off
-chcp 65001
 
 :Retry
 cls
 echo ===================================================
-echo PICOåŒºåŸŸåˆ‡æ¢åŠ©æ‰‹ 
-echo ç‰ˆæœ¬ï¼š0.1 
-echo Byï¼šå¦‚æ¢¦Nya 
+echo PICOÇøÓòÇÐ»»ÖúÊÖ 
+echo °æ±¾£º0.1.1 
+echo By£ºÈçÃÎNya 
 echo ===================================================
 set adb=%~dp0\ADB\adb.exe
 %adb% devices -l | findstr "PICO">nul && (goto Success) || (goto Fail)
@@ -14,23 +13,22 @@ pause
 
 :Success
 echo ===================================================
-echo åŠŸèƒ½æ¸…å• 
-echo 0.æ‰“å¼€åŒºåŸŸè®¾ç½® 
-echo 1.åˆ‡æ¢è®¾å¤‡åŒºåŸŸä¸ºä¸­å›½ 
-echo 2.åˆ‡æ¢è®¾å¤‡åŒºåŸŸä¸ºæµ·å¤– 
+echo ¹¦ÄÜÇåµ¥ 
+echo 0.´ò¿ªÇøÓòÉèÖÃ 
+echo 1.ÇÐ»»Éè±¸ÇøÓòÎªÖÐ¹ú 
+echo 2.ÇÐ»»Éè±¸ÇøÓòÎªº£Íâ 
 echo ===================================================
-echo è¯·è¾“å…¥ä½ è¦æ‰§è¡Œçš„åŠŸèƒ½IDï¼š 
+echo ÇëÊäÈëÄãÒªÖ´ÐÐµÄ¹¦ÄÜID£º 
 set /p mode=%1%
 if %mode% == 0 goto OpenFactoryTest
 if %mode% == 1 goto SwitchChina
 if %mode% == 2 goto SwitchOther
 cls
-echo å‚æ•°é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥æ•°å­—IDï¼ 
+echo ²ÎÊý´íÎó£¬ÇëÖØÐÂÊäÈëÊý×ÖID£¡ 
 goto Success
 
 :Fail
-echo æ‰¾ä¸åˆ°PICOè®¾å¤‡ï¼Œè¯·æ£€æŸ¥æ•°æ®çº¿è¿žæŽ¥æ˜¯å¦æ­£å¸¸ï¼Œè®¾å¤‡æ˜¯å¦å·²æ‰“å¼€å¼€å‘è€…æ¨¡å¼ï¼ 
-echo è¾“å…¥ä»»æ„é”®é‡è¯•... 
+echo ÕÒ²»µ½PICOÉè±¸£¬Çë¼ì²éÊý¾ÝÏßÁ¬½ÓÊÇ·ñÕý³££¬Éè±¸ÊÇ·ñÒÑ´ò¿ª¿ª·¢ÕßÄ£Ê½£¡ 
 pause
 cls
 goto Retry
@@ -38,43 +36,43 @@ goto Retry
 :OpenFactoryTest
 %adb% shell am start -n com.picovr.factorytest/com.picovr.factorytest.setting.PicoSettingMainActivity >nul
 echo ===================================================
-echo æ‰§è¡Œå®Œæˆï¼ 
-echo å¸¦ä¸ŠVRçœ¼é•œçœ‹çœ‹å§ï¼ 
+echo Ö´ÐÐÍê³É£¡ 
+echo ´øÉÏVRÑÛ¾µ¿´¿´°É£¡ 
 goto End
 
 :SwitchChina
 echo ===================================================
-echo å‡†å¤‡åˆ‡æ¢è‡³ï¼šä¸­å›½ 
-echo è¯·ç¡®ä¿è¿‡ç¨‹ä¸­ä¸è¦æ‹”æŽ‰æ•°æ®çº¿ï¼Œè¾“å…¥ä»»æ„é”®ç»§ç»­ 
+echo ×¼±¸ÇÐ»»ÖÁ£ºÖÐ¹ú 
+echo ÇëÈ·±£¹ý³ÌÖÐ²»Òª°ÎµôÊý¾ÝÏß£¬ÊäÈëÈÎÒâ¼ü¼ÌÐø
 pause
 echo ===================================================
-echo æ¸…é™¤åº”ç”¨ç¼“å­˜... 
+echo Çå³ýÓ¦ÓÃ»º´æ... 
 %adb% shell pm clear com.picovr.store
-echo æ¸…é™¤åº”ç”¨ç¼“å­˜... 
+echo Çå³ýÓ¦ÓÃ»º´æ... 
 %adb% shell pm clear com.picovr.vrusercenter
-echo å®‰è£…åº”ç”¨å•†åº—... 
+echo °²×°Ó¦ÓÃÉÌµê... 
 %adb% install -r -d %~dp0\Apks\China\com.picovr.store_3.2.1.apk
-echo å®‰è£…ç”¨æˆ·ä¸­å¿ƒ... 
+echo °²×°ÓÃ»§ÖÐÐÄ... 
 %adb% install -r -d  %~dp0\Apks\China\com.picovr.vrusercenter_1.3.7.apk
-echo æ‰§è¡Œå®Œæˆï¼ 
+echo Ö´ÐÐÍê³É£¡ 
 echo ===================================================
 goto End
 
 :SwitchOther
 echo ===================================================
-echo å‡†å¤‡åˆ‡æ¢è‡³ï¼šæµ·å¤– 
-echo è¯·ç¡®ä¿è¿‡ç¨‹ä¸­ä¸è¦æ‹”æŽ‰æ•°æ®çº¿ï¼Œè¾“å…¥ä»»æ„é”®ç»§ç»­ 
+echo ×¼±¸ÇÐ»»ÖÁ£ºº£Íâ 
+echo ÇëÈ·±£¹ý³ÌÖÐ²»Òª°ÎµôÊý¾ÝÏß£¬ÊäÈëÈÎÒâ¼ü¼ÌÐø 
 pause
 echo ===================================================
-echo æ¸…é™¤åº”ç”¨ç¼“å­˜... 
+echo Çå³ýÓ¦ÓÃ»º´æ... 
 %adb% shell pm clear com.picovr.store
-echo æ¸…é™¤åº”ç”¨ç¼“å­˜... 
+echo Çå³ýÓ¦ÓÃ»º´æ... 
 %adb% shell pm clear com.picovr.vrusercenter
-echo å®‰è£…åº”ç”¨å•†åº—... 
+echo °²×°Ó¦ÓÃÉÌµê... 
 %adb% install -r -d %~dp0\Apks\Other\com.picovr.store_3.3.0.apk
-echo å®‰è£…ç”¨æˆ·ä¸­å¿ƒ... 
+echo °²×°ÓÃ»§ÖÐÐÄ... 
 %adb% install -r -d %~dp0\Apks\Other\com.picovr.vrusercenter_2.0.5.apk
-echo æ‰§è¡Œå®Œæˆï¼ 
+echo Ö´ÐÐÍê³É£¡ 
 echo ===================================================
 goto End
 
