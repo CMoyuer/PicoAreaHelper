@@ -1,14 +1,17 @@
 # PicoAreaHelper
 Pico4换区小助手
 
-![image](https://user-images.githubusercontent.com/51113234/195987643-9224c1a6-76f3-42c1-aa72-679cc825ad34.png)
-
+![image](https://user-images.githubusercontent.com/51113234/196015898-a0fa014b-0b8f-45ef-9093-1154ba2ae3f9.png)
 
 ## 功能列表
 - 打开区域设置
 - 切换成中国
 - 切换成海外
 - 重启设备
+
+## 下载地址
+- [最新版本](https://github.com/CMoyuer/PicoAreaHelper/archive/refs/heads/main.zip)
+- [历史版本](https://github.com/CMoyuer/PicoAreaHelper/releases)
 
 ## 使用方法
 
@@ -25,6 +28,8 @@ Pico4换区小助手
 4. 完成
 
 ## 更新历史
+### V0.2.1 2022-10-16
+- 添加重启提示
 ### V0.2 2022-10-15
 - 添加快捷方法：重启设备
 - 添加海外软件：com.bytedance.pico.matrix
