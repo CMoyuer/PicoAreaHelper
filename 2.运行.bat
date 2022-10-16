@@ -4,14 +4,14 @@
 cls
 echo ===================================================
 echo PICO区域切换助手
-echo 版本：0.2.1
+echo 版本：0.3
 echo By：如梦Nya
-echo ===================================================
 set adb=%~dp0\ADB\adb.exe
 %adb% devices -l | findstr "PICO">nul && (goto Success) || (goto Fail)
 pause
 
 :Success
+echo ===================================================
 echo 温馨提示：每次换区后务必重启一次，以防各种疑难杂症出现
 echo ===================================================
 echo 功能清单
@@ -20,17 +20,19 @@ echo 1.切换设备区域为中国
 echo 2.切换设备区域为海外
 echo 3.重启设备
 echo ===================================================
-echo 请输入你要执行的功能ID：
-set /p mode=%1%
-if %mode% == 0 goto OpenFactoryTest
-if %mode% == 1 goto SwitchChina
-if %mode% == 2 goto SwitchOther
-if %mode% == 3 goto Reboot
-cls
+set mode=-1
+set /p mode=请输入你要执行的功能ID：
+if "%mode%" == "0" goto OpenFactoryTest
+if "%mode%" == "1" goto SwitchChina
+if "%mode%" == "2" goto SwitchOther
+if "%mode%" == "3" goto Reboot
 echo 参数错误，请重新输入数字ID！
+pause
+cls
 goto Success
 
 :Fail
+echo ===================================================
 echo 找不到PICO设备，请检查数据线连接是否正常，设备是否已打开开发者模式！
 pause
 cls
@@ -61,9 +63,8 @@ for %%i in (%~dp0\Apks\China\*.apk) do (
  	%adb% install -r -d "%%i"
 )
 echo 转区完成！
-echo 如果打不开登录界面，请尝试重启设备~
 echo ===================================================
-goto End
+goto ConfirmReboot
 
 :SwitchOther
 echo ===================================================
@@ -79,9 +80,25 @@ for %%i in (%~dp0\Apks\Other\*.apk) do (
  	ECHO 正在安装：%%i
  	%adb% install -r -d "%%i"
 )
-echo 执行完成！
+echo 转区完成！
 echo ===================================================
+goto ConfirmReboot
+
+:ConfirmReboot
+echo 请务必重启，以防各种疑难杂症出现！
+set flag=-1
+set /p flag=是否马上重启设备？（Y/N）
+if "%flag%" == "y" goto Reboot
+if "%flag%" == "Y" goto Reboot
+if "%flag%" == "n" goto CancelReboot
+if "%flag%" == "N" goto CancelReboot
+echo 输入错误，请重新输入！
+goto ConfirmReboot
+
+:CancelReboot
+echo 请稍后手动重启设备，避免发生异常情况！
 goto End
+
 
 :Reboot
 %adb% reboot
