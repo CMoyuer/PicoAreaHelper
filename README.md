@@ -1,9 +1,10 @@
 # PicoAreaHelper
 Pico4换区小助手
 
-![image](https://user-images.githubusercontent.com/51113234/196017891-6bb56ebf-7640-4a45-a20d-e3ce38b269fc.png)
+![image](https://user-images.githubusercontent.com/51113234/196170641-0d1565ca-74a8-48dc-a85b-be3d7374cd15.png)
 
 ## 功能列表
+- 安装ADB驱动
 - 切换至中国区
 - 切换至全球区
 
