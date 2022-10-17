@@ -3,38 +3,38 @@
 :Retry
 cls
 echo ===================================================
-echo PICOåŒºåŸŸåˆ‡æ¢åŠ©æ‰‹
-echo ç‰ˆæœ¬ï¼š1.0
-echo Byï¼šå¦‚æ¢¦Nya
+echo PICOÇøÓòÇÐ»»ÖúÊÖ
+echo °æ±¾£º1.0
+echo By£ºÈçÃÎNya
 set adb=%~dp0\ADB\adb.exe
 %adb% devices -l | findstr "PICO">nul && (goto Success)
 echo ===================================================
-echo æ‰¾ä¸åˆ°PICOè®¾å¤‡ï¼Œè¯·æ£€æŸ¥æ•°æ®çº¿è¿žæŽ¥æ˜¯å¦æ­£å¸¸ï¼Œè®¾å¤‡æ˜¯å¦å·²æ‰“å¼€å¼€å‘è€…æ¨¡å¼ï¼
+echo ÕÒ²»µ½PICOÉè±¸£¬Çë¼ì²éÊý¾ÝÏßÁ¬½ÓÊÇ·ñÕý³££¬Éè±¸ÊÇ·ñÒÑ´ò¿ª¿ª·¢ÕßÄ£Ê½£¡
 pause
 cls
 goto Retry
 
 :Success
 echo ===================================================
-echo å‡†å¤‡åˆ‡æ¢è®¾å¤‡åŒºåŸŸåˆ°ï¼šå…¨çƒ
-echo è¯·ç¡®ä¿è¿‡ç¨‹ä¸­ä¸è¦æ‹”æŽ‰æ•°æ®çº¿
-echo è®¾ç½®å®ŒæˆåŽè®¾å¤‡ä¼šè‡ªåŠ¨é‡å¯ï¼Œæ•¬è¯·ç•™æ„
+echo ×¼±¸ÇÐ»»Éè±¸ÇøÓòµ½£ºÈ«Çò
+echo ÇëÈ·±£¹ý³ÌÖÐ²»Òª°ÎµôÊý¾ÝÏß
+echo ÉèÖÃÍê³ÉºóÉè±¸»á×Ô¶¯ÖØÆô£¬¾´ÇëÁôÒâ
 echo ===================================================
 pause
-echo æ›´æ”¹è®¾å¤‡åŒºåŸŸ...
+echo ¸ü¸ÄÉè±¸ÇøÓò...
 %adb% shell settings put global user_settings_initialized HK
 echo Success
-echo æ¸…é™¤åº”ç”¨ç¼“å­˜ï¼ˆ1/2ï¼‰...
+echo Çå³ýÓ¦ÓÃ»º´æ£¨1/2£©...
 %adb% shell pm clear com.picovr.store
-echo æ¸…é™¤åº”ç”¨ç¼“å­˜ï¼ˆ2/2ï¼‰...
+echo Çå³ýÓ¦ÓÃ»º´æ£¨2/2£©...
 %adb% shell pm clear com.picovr.vrusercenter
-echo å®‰è£…æ‰€éœ€åº”ç”¨...
+echo °²×°ËùÐèÓ¦ÓÃ...
 for %%i in (%~dp0\Apks\Global\*.apk) do (
- 	ECHO æ­£åœ¨å®‰è£…ï¼š%%i
+ 	ECHO ÕýÔÚ°²×°£º%%i
  	%adb% install -r -d "%%i"
 )
-echo æ­£åœ¨é‡å¯è®¾å¤‡...
+echo ÕýÔÚÖØÆôÉè±¸...
 %adb% reboot
-echo æ‰§è¡Œå®Œæ¯•ï¼
+echo Ö´ÐÐÍê±Ï£¡
 echo ===================================================
 pause
