@@ -4,7 +4,7 @@
 cls
 echo ===================================================
 echo PICO区域切换助手
-echo 版本：1.0
+echo 版本：1.0.2
 echo By：如梦Nya
 set adb=%~dp0\ADB\adb.exe
 %adb% devices -l | findstr "PICO">nul && (goto Success)
