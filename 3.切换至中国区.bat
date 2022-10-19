@@ -9,7 +9,7 @@ echo By：如梦Nya
 set adb=%~dp0\ADB\adb.exe
 %adb% devices -l | findstr "PICO">nul && (goto Success)
 echo ===================================================
-echo 找不到PICO设备，请检查数据线连接是否正常，设备是否已打开开发者模式！
+echo 找不到PICO设备，请检查数据线连接是否正常，设备是否已打开USB调试！
 pause
 cls
 goto Retry
